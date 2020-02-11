@@ -17,6 +17,7 @@ export default function Signup(props) {
     confirmPassword: "",
     confirmationCode: ""
   });
+
   const [newUser, setNewUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -38,7 +39,7 @@ export default function Signup(props) {
     setIsLoading(true);
 
     try {
-      const newUser = await Auth.Signup({
+      const newUser = await Auth.signUp({
         username: fields.email,
         password: fields.password
       });
@@ -54,6 +55,7 @@ export default function Signup(props) {
     event.preventDefault();
 
     setIsLoading(true);
+
     try {
       await Auth.confirmSignUp(fields.email, fields.confirmationCode);
       await Auth.signIn(fields.email, fields.password);

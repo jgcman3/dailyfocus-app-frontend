@@ -4,13 +4,13 @@ export default {
     BUCKET: "YOUR_S3_UPLOADS_BUCKET_NAME"
   },
   apiGateway: {
-    REGION: "YOUR_API_GATEWAY_REGION",
-    URL: "YOUR_API_GATEWAY_URL"
+    REGION: "us-east-1",
+    URL: "https://uu8e10zh1m.execute-api.us-east-1.amazonaws.com/dev"
   },
   cognito: {
-    REGION: "YOUR_COGNITO_REGION",
-    USER_POOL_ID: "YOUR_COGNITO_USER_POOL_ID",
-    APP_CLIENT_ID: "YOUR_COGNITO_APP_CLIENT_ID",
-    IDENTITY_POOL_ID: "YOUR_IDENTITY_POOL_ID"
+    REGION: "us-east-1",
+    USER_POOL_ID: "us-east-1_bnDbFgLQq",
+    APP_CLIENT_ID: "5fnbric71sjt3j15de7ciq7lre",
+    IDENTITY_POOL_ID: "us-east-1:1edc30dc-504b-4f0c-a198-353e23603d58"
   }
 };
