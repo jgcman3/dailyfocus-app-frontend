@@ -11,3 +11,9 @@
 .Home .lander p {
   color: #999;
 }
+
+.Home .clock {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 100px;
+}
