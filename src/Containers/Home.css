@@ -1,5 +1,10 @@
 .Home .lander {
-  padding: 80px 0;
+  padding: 200px 0;
+  text-align: center;
+}
+
+.Home .lander .new {
+  padding: 50px 0;
   text-align: center;
 }
 
@@ -12,8 +17,26 @@
   color: #999;
 }
 
+.Home .lander .todoform {
+  padding: 30px 0;
+  font-size: large;
+  text-align: center;
+}
+
 .Home .clock {
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
-  font-size: 100px;
+  font-size: 10rem;
+}
+
+.Home .lander .mission {
+  padding-top: 20px;
+}
+
+.Home .lander .mission .list-group-item {
+  border: 0px;
+}
+
+.Home .lander .mission .list-group-item .list-group-item-heading {
+  font-size: 4rem;
 }

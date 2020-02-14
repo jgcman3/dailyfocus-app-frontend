@@ -20,7 +20,7 @@ export default function NewNote(props) {
 
     try {
       await createNote({ content });
-      props.history.push("/week");
+      props.history.push("/");
     } catch (e) {
       alert(e);
       setIsLoading(false);

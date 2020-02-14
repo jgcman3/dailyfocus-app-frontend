@@ -8,8 +8,10 @@ export default function Notes(props) {
   const file = useRef(null);
   const [note, setNote] = useState(null);
   const [content, setContent] = useState("");
+  const [completedAt, setCompletedAt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isFinishing, setIsFinishing] = useState(false);
 
   useEffect(() => {
     function loadNote() {
@@ -20,8 +22,10 @@ export default function Notes(props) {
       try {
         const note = await loadNote();
         const { content } = note;
+        const { completedAt } = note;
 
         setContent(content);
+        setCompletedAt(completedAt);
         setNote(note);
       } catch (e) {
         alert(e);
@@ -33,6 +37,10 @@ export default function Notes(props) {
 
   function validateForm() {
     return content.length > 0;
+  }
+
+  function isCompleted() {
+    return completedAt > 0;
   }
 
   function saveNote(note) {
@@ -50,7 +58,7 @@ export default function Notes(props) {
       await saveNote({
         content
       });
-      props.history.push("/week");
+      props.history.push("/");
     } catch (e) {
       alert(e);
       setIsLoading(false);
@@ -76,10 +84,30 @@ export default function Notes(props) {
 
     try {
       await deleteNote();
-      props.history.push("/week");
+      props.history.push("/");
     } catch (e) {
       alert(e);
       setIsDeleting(false);
+    }
+  }
+
+  function completeNote(note) {
+    return API.put("notes", `/notes/${props.match.params.id}/complete`, {
+      body: note
+    });
+  }
+
+  async function handleComplete(event) {
+    event.preventDefault();
+
+    setIsFinishing(true);
+
+    try {
+      await completeNote();
+      props.history.push("/");
+    } catch (e) {
+      alert(e);
+      setIsFinishing(false);
     }
   }
 
@@ -100,9 +128,19 @@ export default function Notes(props) {
             bsSize="large"
             bsStyle="primary"
             isLoading={isLoading}
-            disabled={!validateForm()}
+            disabled={!validateForm() || isCompleted()}
           >
             Save
+          </LoaderButton>
+          <LoaderButton
+            block
+            bsSize="large"
+            bsStyle="success"
+            disabled={isCompleted()}
+            onClick={handleComplete}
+            isLoading={isFinishing}
+          >
+            Complete
           </LoaderButton>
           <LoaderButton
             block

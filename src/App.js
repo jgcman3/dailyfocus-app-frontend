@@ -36,7 +36,7 @@ function App(props) {
 
   return (
     !isAuthenticating && (
-      <div className="App">
+      <div className="App container">
         <Navbar fluid collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
