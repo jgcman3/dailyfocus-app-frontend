@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  PageHeader,
-  ListGroup,
-  InputGroup,
-  FormControl,
-  ListGroupItem
-} from "react-bootstrap";
+import { ListGroupItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { API, JS } from "aws-amplify";
+import { API } from "aws-amplify";
 import Clock from "react-live-clock";
 import "./Home.css";
 
@@ -16,6 +10,29 @@ export default function Home(props) {
   const [isFocuse, setIsFocus] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [focusNote, setFocusNote] = useState();
+  const [timeCount, setTimeCount] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+
+  const calculateCountUp = () => {
+    const difference =
+      focusNote != null ? +new Date() - focusNote.createdAt : 0;
+    let countUp = {};
+    if (difference > 0) {
+      countUp = {
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60)
+      };
+    }
+    return countUp;
+  };
+
+  setTimeout(() => {
+    setTimeCount(calculateCountUp());
+  }, 1000);
 
   useEffect(() => {
     async function onLoad() {
@@ -69,10 +86,29 @@ export default function Home(props) {
   }
 
   function renderAuthenticatedSecond(note) {
+    const timerComponents = [];
+    if (
+      timeCount.hours != null &&
+      timeCount.minutes != null &&
+      timeCount.seconds != null
+    ) {
+      timerComponents.push(
+        <span>
+          {(timeCount.hours > 9 ? timeCount.hours : "0" + timeCount.hours) +
+            ":" +
+            (timeCount.minutes > 9
+              ? timeCount.minutes
+              : "0" + timeCount.minutes) +
+            ":" +
+            (timeCount.seconds > 9
+              ? timeCount.seconds
+              : "0" + timeCount.seconds)}
+        </span>
+      );
+    }
+
     return isFocuse && note != null ? (
-      <div className="lander">
-        <h3 className="clock">00:00:42</h3>
-        <h3>Today, Your mission is .. </h3>
+      <div>
         <div className="mission">
           <LinkContainer key={note.noteId} to={`/notes/${note.noteId}`}>
             <ListGroupItem header={note.content.trim().split("\n")[0]}>
@@ -80,19 +116,17 @@ export default function Home(props) {
             </ListGroupItem>
           </LinkContainer>
         </div>
+        <h3 className="clock">{timerComponents}</h3>
       </div>
     ) : (
-      <div className="lander">
-        <h2>what is your main focus for today?</h2>
-        <div className="mission">
-          <LinkContainer key="new" to="/notes/new">
-            <ListGroupItem>
-              <h4>
-                <b>{"\uFF0B"}</b> Create a new mission
-              </h4>
-            </ListGroupItem>
-          </LinkContainer>
-        </div>
+      <div className="mission">
+        <LinkContainer key="new" to="/notes/new">
+          <ListGroupItem>
+            <h4>
+              <b>{"\uFF0B"}</b> Create a new mission
+            </h4>
+          </ListGroupItem>
+        </LinkContainer>
       </div>
     );
   }
@@ -103,7 +137,12 @@ export default function Home(props) {
 
   return (
     <div className="Home container">
-      {props.isAuthenticated ? renderAuthenticated() : renderNotAuthenticated()}
+      <div className="lander">
+        <h3>Today, Your mission is .. </h3>
+        {props.isAuthenticated
+          ? renderAuthenticated()
+          : renderNotAuthenticated()}
+      </div>
     </div>
   );
 }

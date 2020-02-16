@@ -10,6 +10,7 @@ import { Auth } from "aws-amplify";
 function App(props) {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
     onLoad();
@@ -19,6 +20,8 @@ function App(props) {
     try {
       await Auth.currentSession();
       userHasAuthenticated(true);
+      const info = await Auth.currentUserInfo();
+      setUserInfo(info);
     } catch (e) {
       if (e !== "No current user") {
         alert(e);
@@ -48,7 +51,7 @@ function App(props) {
             <Nav pullRight>
               {isAuthenticated ? (
                 <>
-                  <NavItem>@jgcman3</NavItem>
+                  <NavItem>@{userInfo.attributes.email.split("@")[0]}</NavItem>
                   <LinkContainer to="/week">
                     <NavItem>Week</NavItem>
                   </LinkContainer>
