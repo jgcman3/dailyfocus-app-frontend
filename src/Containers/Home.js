@@ -68,14 +68,7 @@ export default function Home(props) {
   }
 
   function renderNotAuthenticated() {
-    const number = Math.floor(Math.random() * 2);
-    return number === 1 ? (
-      <div className="lander">
-        <Clock className="clock" format={"HH:mm:ss"} ticking={true} />
-        <h3>"Lost time is never found again."</h3>
-        <p>by Benjamin Franklin</p>
-      </div>
-    ) : (
+    return (
       <div className="lander">
         <Clock className="clock" format={"HH:mm:ss"} ticking={true} />
 
@@ -132,17 +125,19 @@ export default function Home(props) {
   }
 
   function renderAuthenticated() {
-    return <div>{!isLoading && renderAuthenticatedSecond(focusNote)}</div>;
+    return (
+      <div>
+        <div className="lander">
+          <h3>Today, Your mission is .. </h3>
+          {!isLoading && renderAuthenticatedSecond(focusNote)}
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="Home container">
-      <div className="lander">
-        <h3>Today, Your mission is .. </h3>
-        {props.isAuthenticated
-          ? renderAuthenticated()
-          : renderNotAuthenticated()}
-      </div>
+      {props.isAuthenticated ? renderAuthenticated() : renderNotAuthenticated()}
     </div>
   );
 }
