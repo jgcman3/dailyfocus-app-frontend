@@ -11,8 +11,11 @@ jobs:
       - name: Checkout source code. # 레포지토리 체크아웃
         uses: actions/checkout@master
 
-      - name: zip code
-        run: npm run-script build
+      - name: Install Dependencies # 의존 파일 설치
+        run: npm install
+
+      - name: Build # React Build
+        run: npm run build
 
       - name: Deploy # S3에 배포하기
         env:
