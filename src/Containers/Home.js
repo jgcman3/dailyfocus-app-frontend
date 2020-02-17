@@ -71,7 +71,6 @@ export default function Home(props) {
     return (
       <div className="lander">
         <Clock className="clock" format={"HH:mm:ss"} ticking={true} />
-
         <h3>"The future depends on what we do in the present."</h3>
         <p>by Mahatma Gandhi</p>
       </div>
@@ -101,7 +100,8 @@ export default function Home(props) {
     }
 
     return isFocuse && note != null ? (
-      <div>
+      <div className="lander">
+        <h3>Today, Your mission is .. </h3>
         <div className="mission">
           <LinkContainer key={note.noteId} to={`/notes/${note.noteId}`}>
             <ListGroupItem header={note.content.trim().split("\n")[0]}>
@@ -112,27 +112,25 @@ export default function Home(props) {
         <h3 className="clock">{timerComponents}</h3>
       </div>
     ) : (
-      <div className="mission">
-        <LinkContainer key="new" to="/notes/new">
-          <ListGroupItem>
-            <h4>
-              <b>{"\uFF0B"}</b> Create a new mission
-            </h4>
-          </ListGroupItem>
-        </LinkContainer>
+      <div className="lander">
+        <Clock className="clock" format={"HH:mm:ss"} ticking={true} />
+        <h3>"The future depends on what we do in the present."</h3>
+        <p>by Mahatma Gandhi</p>
+        <div className="mission">
+          <LinkContainer key="new" to="/notes/new">
+            <ListGroupItem>
+              <h4>
+                <b>{"\uFF0B"}</b> Create a new mission
+              </h4>
+            </ListGroupItem>
+          </LinkContainer>
+        </div>
       </div>
     );
   }
 
   function renderAuthenticated() {
-    return (
-      <div>
-        <div className="lander">
-          <h3>Today, Your mission is .. </h3>
-          {!isLoading && renderAuthenticatedSecond(focusNote)}
-        </div>
-      </div>
-    );
+    return <div>{!isLoading && renderAuthenticatedSecond(focusNote)}</div>;
   }
 
   return (

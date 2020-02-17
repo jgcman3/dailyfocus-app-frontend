@@ -32,6 +32,9 @@ export default function Week(props) {
   }
 
   function renderNotesList(notes) {
+    notes.sort(function(a, b) {
+      return b.createdAt - a.createdAt;
+    });
     return notes.map(function(note) {
       return (
         <LinkContainer key={note.noteId} to={`/notes/${note.noteId}`}>
