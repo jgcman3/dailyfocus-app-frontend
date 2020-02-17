@@ -19,9 +19,9 @@ function App(props) {
   async function onLoad() {
     try {
       await Auth.currentSession();
-      userHasAuthenticated(true);
       const info = await Auth.currentUserInfo();
       setUserInfo(info);
+      userHasAuthenticated(true);
     } catch (e) {
       if (e !== "No current user") {
         alert(e);
@@ -51,7 +51,7 @@ function App(props) {
             <Nav pullRight>
               {isAuthenticated ? (
                 <>
-                  {/* <NavItem>@{userInfo.attributes.email.split("@")[0]}</NavItem> */}
+                  <NavItem>@{userInfo.attributes.email.split("@")[0]}</NavItem>
                   <LinkContainer to="/week">
                     <NavItem>Week</NavItem>
                   </LinkContainer>
