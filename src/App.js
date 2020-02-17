@@ -51,7 +51,7 @@ function App(props) {
             <Nav pullRight>
               {isAuthenticated ? (
                 <>
-                  <NavItem>@{userInfo.attributes.email.split("@")[0]}</NavItem>
+                  {/* <NavItem>@{userInfo.attributes.email.split("@")[0]}</NavItem> */}
                   <LinkContainer to="/week">
                     <NavItem>Week</NavItem>
                   </LinkContainer>
