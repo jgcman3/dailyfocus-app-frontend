@@ -1,9 +1,21 @@
+.Home {
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
 .Home .container {
   padding-right: 0px;
   padding-left: 0px;
 }
 
 .Home .lander {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
   padding: 120px 0;
   text-align: center;
 }
@@ -31,11 +43,12 @@
 .Home .clock {
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
-  font-size: 10rem;
+  font-size: 9rem;
+  color: white;
 }
 
 .Home .lander .mission {
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 .Home .lander .mission .list-group-item {

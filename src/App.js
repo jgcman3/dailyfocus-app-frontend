@@ -7,6 +7,8 @@ import "./App.css";
 
 import { Auth } from "aws-amplify";
 
+const body = document.querySelector("body");
+
 function App(props) {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -16,8 +18,16 @@ function App(props) {
     onLoad();
   }, []);
 
+  function handleImgLoad() {}
+
   async function onLoad() {
     try {
+      const image = new Image();
+      image.src = `Images/${Math.floor(Math.random() * 4) + 1}.jpg`;
+      image.addEventListener("loadend", handleImgLoad);
+      image.classList.add("bgImg");
+      body.prepend(image);
+
       await Auth.currentSession();
       const info = await Auth.currentUserInfo();
       setUserInfo(info);
@@ -39,7 +49,7 @@ function App(props) {
 
   return (
     !isAuthenticating && (
-      <div className="App container">
+      <div className="App">
         <Navbar fluid collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
@@ -49,7 +59,10 @@ function App(props) {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav pullRight>
-              {isAuthenticated ? (
+              {isAuthenticated &&
+              userInfo &&
+              userInfo.attributes &&
+              userInfo.attributes.email ? (
                 <>
                   <NavItem>@{userInfo.attributes.email.split("@")[0]}</NavItem>
                   <LinkContainer to="/week">

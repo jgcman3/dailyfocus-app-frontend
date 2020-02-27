@@ -113,9 +113,13 @@ export default function Home(props) {
       </div>
     ) : (
       <div className="lander">
-        <Clock className="clock" format={"HH:mm:ss"} ticking={true} />
-        <h3>"The future depends on what we do in the present."</h3>
-        <p>by Mahatma Gandhi</p>
+        <div className="clock">
+          <Clock format={"HH:mm:ss"} ticking={true} />
+        </div>
+        <div className="message">
+          <h3>"The future depends on what we do in the present."</h3>
+          <span>by Mahatma Gandhi</span>
+        </div>
         <div className="mission">
           <LinkContainer key="new" to="/notes/new">
             <ListGroupItem>
