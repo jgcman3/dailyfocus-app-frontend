@@ -23,7 +23,7 @@ function App(props) {
   async function onLoad() {
     try {
       const image = new Image();
-      image.src = `Images/${Math.floor(Math.random() * 4) + 1}.jpg`;
+      image.src = `Images/${Math.floor(Math.random() * 12) + 1}.jpg`;
       image.addEventListener("loadend", handleImgLoad);
       image.classList.add("bgImg");
       body.prepend(image);
