@@ -26,9 +26,9 @@ function App(props) {
       image.classList.add("bgImg");
       body.prepend(image);
 
-      await Auth.currentSession();
       const info = await Auth.currentUserInfo();
       setUserInfo(info);
+      await Auth.currentSession();
       userHasAuthenticated(true);
     } catch (e) {
       if (e !== "No current user") {
@@ -55,22 +55,34 @@ function App(props) {
             </Link>
           </div>
           <div className="App-user">
-            {isAuthenticated &&
-            userInfo &&
-            userInfo.attributes &&
-            userInfo.attributes.email ? (
+            {isAuthenticated ? (
               <>
-                <Link to="/">
-                  <span className="App-user-title">
-                    @{userInfo.attributes.email.split("@")[0]}
-                  </span>
-                </Link>
-                <Link to="/week">
-                  <span className="App-user-title">Week</span>
-                </Link>
-                <Link onClick={handleLogout}>
-                  <span className="App-user-title">Logout</span>
-                </Link>
+                {userInfo &&
+                userInfo.attributes &&
+                userInfo.attributes.email ? (
+                  <>
+                    <Link to="/">
+                      <span className="App-user-title">
+                        @{userInfo.attributes.email.split("@")[0]}
+                      </span>
+                    </Link>
+                    <Link to="/week">
+                      <span className="App-user-title">Week</span>
+                    </Link>
+                    <Link onClick={handleLogout}>
+                      <span className="App-user-title">Logout</span>
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/week">
+                      <span className="App-user-title">Week</span>
+                    </Link>
+                    <Link onClick={handleLogout}>
+                      <span className="App-user-title">Logout</span>
+                    </Link>
+                  </>
+                )}
               </>
             ) : (
               <>
