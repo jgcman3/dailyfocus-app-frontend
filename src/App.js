@@ -50,7 +50,41 @@ function App(props) {
   return (
     !isAuthenticating && (
       <div className="App">
-        <Navbar fluid collapseOnSelect>
+        <div className="App-header">
+          <div className="App-brand">
+            <Link to="/">
+              <span className="App-brand-title">Daily Focus</span>
+            </Link>
+          </div>
+          <div className="App-user">
+            {isAuthenticated &&
+            userInfo &&
+            userInfo.attributes &&
+            userInfo.attributes.email ? (
+              <>
+                <Link to="/">
+                  <span className="App-user-title">
+                    @{userInfo.attributes.email.split("@")[0]}
+                  </span>
+                </Link>
+                <Link to="/week">
+                  <span className="App-user-title">Week</span>
+                </Link>
+                <Link onClick={handleLogout}>
+                  <span className="App-user-title">Logout</span>
+                </Link>
+              </>
+            ) : (
+              <>
+                <div className="App-user-nojoin">
+                  <Link to="/signup">Signup</Link>
+                  <Link to="/login">Login</Link>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+        {/* <Navbar fluid collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
               <Link to="/">Daily Focus</Link>
@@ -82,7 +116,7 @@ function App(props) {
               )}
             </Nav>
           </Navbar.Collapse>
-        </Navbar>
+        </Navbar> */}
         <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
       </div>
     )

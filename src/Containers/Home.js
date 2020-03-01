@@ -104,9 +104,9 @@ export default function Home(props) {
         <h3>Today, Your mission is .. </h3>
         <div className="mission">
           <LinkContainer key={note.noteId} to={`/notes/${note.noteId}`}>
-            <ListGroupItem header={note.content.trim().split("\n")[0]}>
-              {"Created: " + new Date(note.createdAt).toLocaleString()}
-            </ListGroupItem>
+            <ListGroupItem
+              header={note.content.trim().split("\n")[0]}
+            ></ListGroupItem>
           </LinkContainer>
         </div>
         <h3 className="clock">{timerComponents}</h3>
