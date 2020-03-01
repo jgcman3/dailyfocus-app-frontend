@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Navbar, Nav, NavItem } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
 import Routes from "./Routes";
 import "./App.css";
 
@@ -76,47 +74,18 @@ function App(props) {
               </>
             ) : (
               <>
-                <div className="App-user-nojoin">
-                  <Link to="/signup">Signup</Link>
-                  <Link to="/login">Login</Link>
+                <div className="App-user-title">
+                  <Link to="/signup">
+                    <span className="App-user-title">Signup</span>
+                  </Link>
+                  <Link to="/login">
+                    <span className="App-user-title">Login</span>
+                  </Link>
                 </div>
               </>
             )}
           </div>
         </div>
-        {/* <Navbar fluid collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">Daily Focus</Link>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav pullRight>
-              {isAuthenticated &&
-              userInfo &&
-              userInfo.attributes &&
-              userInfo.attributes.email ? (
-                <>
-                  <NavItem>@{userInfo.attributes.email.split("@")[0]}</NavItem>
-                  <LinkContainer to="/week">
-                    <NavItem>Week</NavItem>
-                  </LinkContainer>
-                  <NavItem onClick={handleLogout}>Logout</NavItem>
-                </>
-              ) : (
-                <>
-                  <LinkContainer to="/signup">
-                    <NavItem>Signup</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to="/login">
-                    <NavItem>Login</NavItem>
-                  </LinkContainer>
-                </>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar> */}
         <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
       </div>
     )
