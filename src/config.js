@@ -5,12 +5,12 @@ export default {
   },
   apiGateway: {
     REGION: "ap-northeast-2",
-    URL: "https://mxr7119es6.execute-api.ap-northeast-2.amazonaws.com/dev"
+    URL: "https://4obsa6ey6j.execute-api.ap-northeast-2.amazonaws.com/dev"
   },
   cognito: {
     REGION: "ap-northeast-2",
-    USER_POOL_ID: "ap-northeast-2_jtfPgzZmh",
-    APP_CLIENT_ID: "1nvv44srilv9jmk9eooqogtdoc",
-    IDENTITY_POOL_ID: "ap-northeast-2:c00b3ccb-cd75-4372-8755-d092efefdca4"
+    USER_POOL_ID: "ap-northeast-2_FJxXpBjCn",
+    APP_CLIENT_ID: "1bh1r0lci79891ifpv44ijl62a",
+    IDENTITY_POOL_ID: "ap-northeast-2:772e86dd-e9d3-4322-9c70-7ccf4beec6cb"
   }
 };
